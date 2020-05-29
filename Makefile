@@ -4,7 +4,7 @@ CP = cp
 RM = rm -f
 MV = mv -f
 
-LDFLAGS = -lm -lpthread -lrt -lpmem
+LDFLAGS = -lm -lpthread -lrt -lpmem -lpmemobj
 
 EXE_FILES = alloc_1 alloc_more
  

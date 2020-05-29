@@ -17,7 +17,7 @@ int main()
     int i = 0;
     sprintf(file_name, "/mnt/dax/MALLOC_%d", i);
     PMEMobjpool *pop = pmemobj_create(file_name, LAYOUT_NAME,
-                                      PMEMOBJ_MIN_POOL, 0666);
+                                     PMEMOBJ_MIN_POOL, 0666);
 
     if (pop == NULL)
     {
