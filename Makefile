@@ -1,31 +1,25 @@
+all:malloc_2 alloc_1 alloc_more
 
-CC = cc
-CP = cp
-RM = rm -f
-MV = mv -f
-
-LDFLAGS = -lm -lpthread -lrt -lpmem -lpmemobj
-
-EXE_FILES = alloc_1 alloc_more
- 
-all: ${EXE_FILES}
-ALLOC_1_OBJ=alloc_1.o
-ALLOC_MORE_OBJ=alloc_more.o
-
-
-OBJS = alloc_1.o alloc_more.o 
-
-alloc_1.o: alloc_1.c
-	${CC} -Wall -D_FILE_OFFSET_BITS=64 -g -c alloc_1.c
-
-alloc_more.o: alloc_more.c
-	${CC} -Wall -D_FILE_OFFSET_BITS=64 -g -c alloc_more.c
+malloc_2: malloc_2.o
+	gcc -o malloc_2 malloc_2.o -lm -lpthread -lpmem
 
 alloc_1: alloc_1.o
-	${CC} -Wall -D_FILE_OFFSET_BITS=64  -O2 -g -o $@ ${ALLOC_1_OBJ} ${LDFLAGS} 
+	gcc -o alloc_1 alloc_1.o -lm -lpthread -lpmem -lpmemobj
 
 alloc_more: alloc_more.o
-	${CC} -Wall -D_FILE_OFFSET_BITS=64  -O2 -g -o $@ ${ALLOC_MORE_OBJ} ${LDFLAGS} 
+	gcc -o alloc_more alloc_more.o -lm -lpthread -lpmem -lpmemobj
+
+malloc_2.o :
+	gcc -c malloc_2.c
+
+alloc_1.o: alloc_1.c
+	gcc -c alloc_1.c
+
+alloc_more.o: alloc_more.c
+	gcc -c alloc_more.c
 
 clean:
-	${RM} *.o core ~* *.cpp ${EXE_FILES}
+	rm -rf *.o
+
+
+
