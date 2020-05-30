@@ -1,7 +1,7 @@
 all:malloc_2 alloc_1 alloc_more
 
 malloc_2: malloc_2.o
-	gcc -o malloc_2 malloc_2.o -lm -lpthread -lpmem
+	gcc -o malloc_2 malloc_2.o -lm -lpthread -lpmem 
 
 alloc_1: alloc_1.o
 	gcc -o alloc_1 alloc_1.o -lm -lpthread -lpmem -lpmemobj

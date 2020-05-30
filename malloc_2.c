@@ -2,12 +2,13 @@
 #include <libpmem.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define PATH "/mnt/dax/THREAD_MALLOC_"
+#include <errno.h>
+#define PATH "/mnt/dax_200g/THREAD_MALLOC_"
 
 static int malloc_num = 0;
 void *add_pmalloc(size_t size)
 {
-    int num = __sync_fetch_and_add(&malloc_num);
+    int num = ++malloc_num;
 
     size_t mapped_len;
     char path[100];
@@ -30,11 +31,13 @@ int main(int argc, char *argv[])
     int i;
     for (i = 0; i < num; i++)
     {
-        size_t mapped_len;
-        size_t size = 4096;
-        if (add_pmalloc(size, &mapped_len) == NULL)
+        //size_t mapped_len;
+        size_t size = 512*1024;
+        if (add_pmalloc(size) == NULL)
         {
-            printf("%d malloc error\n", i);
+            printf("%d malloc error: %s\n", i, pmem_errormsg());
+	    //sleep(100);
+	    //pmem_errormsg();
             exit(1);
         }
         else
