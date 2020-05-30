@@ -22,12 +22,12 @@ int main()
     struct test_data *root = pmemaddr;
     if (pmemaddr == NULL)
     {
-        printf("%d malloc error: %s\n", i, pmem_errormsg());
+        printf("malloc error: %s\n", pmem_errormsg());
         exit(1);
     }
     else
     {
-        printf("%d malloc success\n", i);
+        printf("malloc success\n");
     }
 
     printf("%d : %s\n",pmemaddr->id,pmemaddr->name);

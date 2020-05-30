@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <string.h>
 //#define PATH "/mnt/dax_200g/THREAD_MALLOC_"
 
 //static int malloc_num = 0;
@@ -22,12 +23,12 @@ int main()
     struct test_data *root = pmemaddr;
     if (pmemaddr == NULL)
     {
-        printf("%d malloc error: %s\n", i, pmem_errormsg());
+        printf("malloc error: %s\n",pmem_errormsg());
         exit(1);
     }
     else
     {
-        printf("%d malloc success\n", i);
+        printf("malloc success\n");
     }
 
     pmemaddr->id = 0;
