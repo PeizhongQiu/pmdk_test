@@ -33,18 +33,16 @@ int main()
 
     pmemaddr->id = 0;
     strcpy(pmemaddr->name, "12345");
+    pmem_persist(pmemaddr, sizeof(test_data));
     pmemaddr++;
     pmemaddr->id = 1;
     strcpy(pmemaddr->name, "67890");
+    pmem_persist(pmemaddr, sizeof(test_data));
     pmemaddr++;
     pmemaddr->id = 2;
     strcpy(pmemaddr->name, "10111");
-
-    if (is_pmem)
-        pmem_persist(root, mapped_len);
-    else
-        pmem_msync(root, mapped_len);
-    
+	pmem_persist(pmemaddr, sizeof(test_data));
+       
     pmem_unmap(root, mapped_len);
     return 0;
 }
