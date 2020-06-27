@@ -1,35 +1,36 @@
-#include<sys/mman.h>　
-#include<sys/types.h>　
+#include<sys/mman.h>
+#include<sys/types.h>
 #include<fcntl.h>
 #include<string.h>
-#include<stdio.h>　
-#include<unistd.h>　
+#include<stdio.h>
+#include<unistd.h>
 
-typedef struct{　
-    char name[4];　
-    int age;　
-}people;　
+typedef struct{
+    char name[4];
+    int age;
+}people;
 
 int malloc_num = 0;
 
 int main(int argc,char **argv)//map a normal file as shared mem:　
 {
     int fd,i;
-    people *p_map;　
+    people *p_map;
 	int num = atoi(argv[1]);
 	char path[100];
 	for(i = 0;i<num;i++)
 	{
 		sprintf(path,"PATH%d",num);
-		fd = open(path,O_CREAT|O_RDWR|O_TRUNC,00777);　
+		fd = open(path,O_CREAT|O_RDWR|O_TRUNC,00777);
 	
 //	    lseek(fd,sizeof(people)*5-1,SEEK_SET);　
 //	
 //	    write(fd,"",1);　
 	
-	    p_map=(people*)mmap(NULL,sizeof(people)*10,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);　
+	    p_map=(people*)mmap(NULL,sizeof(people)*10,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
 	
-	    close(fd);　
+	    close(fd);
+	    printf("p_map ok!\n");
 	}
 //    char temp;　
 
@@ -48,8 +49,8 @@ int main(int argc,char **argv)//map a normal file as shared mem:　
 //        (*(p_map+i)).age=20+i;　
 //
 //    }　　
-    munmap(p_map,sizeof(people)*10);　
+    munmap(p_map,sizeof(people)*10);
 
-    printf("umapok\n");　
+    printf("umapok\n");
 	return 0;
-}　
+}
