@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     for (i = 0; i < num; i++)
     {
         //size_t mapped_len;
-        size_t size = 512*1024;
+        size_t size = 512;
         if (add_pmalloc(size) == NULL)
         {
             printf("%d malloc error: %s\n", i, pmem_errormsg());

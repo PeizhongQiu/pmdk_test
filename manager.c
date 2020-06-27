@@ -33,21 +33,21 @@ int main()
 
     pmemaddr->id = 0;
     strcpy(pmemaddr->name, "12345");
-    pmem_persist(pmemaddr, sizeof(test_data));
+    pmem_persist(pmemaddr, sizeof(struct test_data));
     pmemaddr++;
     pmemaddr->id = 1;
     strcpy(pmemaddr->name, "67890");
-    pmem_persist(pmemaddr, sizeof(test_data));
+    pmem_persist(pmemaddr, sizeof(struct test_data));
     pmemaddr++;
     pmemaddr->id = 2;
     strcpy(pmemaddr->name, "10111");
-	pmem_persist(pmemaddr, sizeof(test_data));
+	pmem_persist(pmemaddr, sizeof(struct test_data));
 	
-	struct test_data *pmemaddr = pmem_map_file("/mnt/dax_200g/THREAD_MALLOC_0",size * 2, PMEM_FILE_CREATE,
+	pmemaddr = pmem_map_file("/mnt/dax_200g/THREAD_MALLOC_0",size * 2, PMEM_FILE_CREATE,
                                   0666, &mapped_len, &is_pmem);
     pmemaddr[3].id = 3;
 	strcpy(pmemaddr->name, "21314");
-	pmem_persist(pmemaddr, sizeof(test_data));
+	pmem_persist(pmemaddr, sizeof(struct test_data));
        
     pmem_unmap(pmemaddr, mapped_len);
     return 0;
