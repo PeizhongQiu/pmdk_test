@@ -20,14 +20,16 @@ int main(int argc,char **argv)//map a normal file as shared mem:¡¡
 	char path[100];
 	for(i = 0;i<num;i++)
 	{
-		sprintf(path,"PATH%d",num);
+		sprintf(path,"PATH%d",malloc_num);
+		malloc_num++;
 		fd = open(path,O_CREAT|O_RDWR|O_TRUNC,00777);
 	
 //	    lseek(fd,sizeof(people)*5-1,SEEK_SET);
 //	    write(fd,"",1);
 	    p_map=(people*)mmap(NULL,sizeof(people)*10,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
-		if (addr == MAP_FAILED) {
+		if (p_map == MAP_FAILED) {
 			printf("%d malloc error\n",i);
+			return 0;
 		} else {
 			printf("%d malloc ok\n",i);
 		} 
