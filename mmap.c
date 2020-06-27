@@ -4,6 +4,7 @@
 #include<string.h>
 #include<stdio.h>
 #include<unistd.h>
+#include <errno.h>
 
 typedef struct{
     char name[4];
@@ -18,6 +19,7 @@ int main(int argc,char **argv)//map a normal file as shared mem:¡¡
     people *p_map;
 	int num = atoi(argv[1]);
 	char path[100];
+	extern int errno;
 	for(i = 0;i<num;i++)
 	{
 		sprintf(path,"PATH%d",malloc_num);
@@ -29,6 +31,7 @@ int main(int argc,char **argv)//map a normal file as shared mem:¡¡
 	    p_map=(people*)mmap(NULL,sizeof(people)*10,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
 		if (p_map == MAP_FAILED) {
 			printf("%d malloc error\n",i);
+			printf("errno: %2d\t%s\n",errno,strerror(errno));
 			return 0;
 		} else {
 			printf("%d malloc ok\n",i);
